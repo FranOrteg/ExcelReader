@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>Archivos Excel en Angular</h2>
+    <input type="file" (change)="onFileChange($event)" accept=".xlsx, .xls" />
+    
+    <table *ngIf="data.length">
+      <tr>
+        <th *ngFor="let header of data[0]">{{ header }}</th>
+      </tr>
+      <tr *ngFor="let row of data.slice(1); let i = index">
+        <td *ngFor="let cell of row; let j = index" contenteditable="true" (blur)="updateCell(i, j, $event)">
+          {{ cell }}
+        </td>
+      </tr>
+    </table>
+    
+    <button (click)="exportToExcel()" [disabled]="!data.length">Exportar a Excel</button>
+  </div>
+  
